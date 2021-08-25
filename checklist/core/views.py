@@ -4,16 +4,18 @@ from rest_framework import status
 from core.models import CheckList, CheckListItem
 from core.serializers import CheckListSerializer, CheckListItemSerializer
 from django.http import Http404
+from rest_framework.permissions import IsAuthenticated
 # Create your views here.
 
 
-class TestAPIView(APIView):
-    def get(self, request, format=None):
-        return Response({'name': 'Pratyaydeep from Class Based View'})
+# class TestAPIView(APIView):
+#     def get(self, request, format=None):
+#         return Response({'name': 'Pratyaydeep from Class Based View'})
 
 
 class CheckListsAPIView(APIView):
     serializer_class = CheckListSerializer
+    permission_classes = [IsAuthenticated, ]
 
     def get(self, request, format=None):
         data = CheckList.objects.all()
@@ -67,7 +69,7 @@ class CheckListItemCreateAPIView(APIView):
     serializer_class = CheckListItemSerializer
 
     def post(self, request, format=None):
-        #print(" debug: ", request.data)
+        # print(" debug: ", request.data)
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
             serializer.save()

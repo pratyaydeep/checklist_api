@@ -8,6 +8,7 @@ django = "*"
 djangorestframework = "*"
 pyyaml = "*"
 uritemplate = "*"
+djangorestframework-simplejwt = "*"
 
 [dev-packages]
 
